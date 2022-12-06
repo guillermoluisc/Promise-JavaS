@@ -8,26 +8,47 @@ import heroes from "./heroes.js";
 
 // console.log(h)
 
-//Crear una array function asignada a una constante, con el nombre de getHeroeByIdAsync que reciba como parámetro el Id del héroe.
 
-// const getHeroeByIdAsync = (id)=>{
-//     //promesa
-//     //const getHeroeById = (id) => heroes.find( (heroe) => heroe.id === id );
-
-// }
-
-// const getHeroeById = (id) => heroes.find( (heroe) => heroe.id === id );
-
-
-
-//hasta acá pàrece andar, hay que ver si es lo que pide
+//Promises/promesas :
 const getHeroeByIdAsync = id=>{
     return new Promise((resolve, reject)=>{
-        resolve(heroes.find( (heroe) => heroe.id === id))
-        reject("No existe el heroes con ese id")
+        let h=heroes.find( (heroe) => heroe.id === id)
+        if (heroes.find( (heroe) => heroe.id === id)){ 
+            resolve("El heroe con id: "+ h.id+" "+"cuyo nombre es: " +h.name + " existe")   
+        }else{
+            reject("No existe el heroes con el id: "+id)
+        }    
 })};
 getHeroeByIdAsync(1).then(res=>{
     console.log(res);
 }).catch(error=>{
     console.log(error);
 })
+//La Fetch API 
+//'https://api.github.com/users/manishmshiva'
+
+fetch('https://api.github.com/users/manishmshiva')
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(error => console.error(error));
+
+  //último ejercicio
+
+const getName = async () => {
+    try{
+        const result = await fetch('https://api.github.com/users/manishmshiva');
+        const data = await result.json();
+        return data;
+    }
+    catch (error) {
+        console.log('reject catched')
+        console.log(error)
+
+    }
+    
+ }
+ getName().then(text => {
+    console.log(text.name);
+  }).catch(error=>{
+    console.log(error);
+});
