@@ -13,7 +13,7 @@ import heroes from "./heroes.js";
 const getHeroeByIdAsync = id=>{
     return new Promise((resolve, reject)=>{
         let h=heroes.find( (heroe) => heroe.id === id)
-        if (heroes.find( (heroe) => heroe.id === id)){ 
+        if (h){ 
             resolve("El heroe con id: "+ h.id+" "+"cuyo nombre es: " +h.name + " existe")   
         }else{
             reject("No existe el heroes con el id: "+id)
@@ -26,14 +26,11 @@ getHeroeByIdAsync(1).then(res=>{
 })
 //La Fetch API 
 //'https://api.github.com/users/manishmshiva'
-
 fetch('https://api.github.com/users/manishmshiva')
   .then(response => response.json())
   .then(response => console.log(response))
   .catch(error => console.error(error));
-
   //último ejercicio
-
 const getName = async () => {
     try{
         const result = await fetch('https://api.github.com/users/manishmshiva');
@@ -43,9 +40,7 @@ const getName = async () => {
     catch (error) {
         console.log('reject catched')
         console.log(error)
-
-    }
-    
+    } 
  }
  getName().then(text => {
     console.log(text.name);
